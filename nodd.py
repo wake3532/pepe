@@ -13,7 +13,6 @@ import time
 
 client = discord.Client()
 
-owner = ['724769557759393837']
 @client.event
 async def on_ready():
     print('봇이 로그인 하였습니다.')
@@ -34,14 +33,7 @@ async def on_ready():
         for (m) in range(5):
             await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(name=messages[(m)], type=discord.ActivityType.watching))
             await asyncio.sleep(4)
-		
-@client.event
-async def on_member_join(member):
-    try:
-        syscha = member.guild.system_channel
-        await syscha.send(f"<:Blobhearteyes:767031123586580520>  {member.mention}님! 환영합니다! 규칙을 꼭 확인해주세요! <:Phappy:767031123851083867> 만약에 어려움이 있으시면 **관리자나 티켓을 열어주세요 ! **  ")
-    except:
-        pass
+
 
 @client.event
 async def on_member_remove(member):
