@@ -9,6 +9,7 @@ import youtube_dl
 from youtube_dl import YoutubeDL
 from io import StringIO
 import os
+import youtube_dl
 
 ##################### 로깅 ###########################
 log_stream = StringIO()    
