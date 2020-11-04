@@ -29,7 +29,7 @@ async def on_ready():
     while True:
         user = len(client.users)
         server = len(client.guilds)
-        messages = ["NICE", "FUCK YOU" , "HAHA LOL " , str(user) + "명은 FUCK YOU .", str(server) + "명은 내꼬"]
+        messages = ["안녕하세요. ", "🌷 " , "👋  " , str(user) + "명이 우리 서버 가입중이라니. 참 기분이 좋아요..!  .", str(server) + "명이 부스트를 해주셨어요. 고마워요!"]
         for (m) in range(5):
             await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(name=messages[(m)], type=discord.ActivityType.watching))
             await asyncio.sleep(4)
@@ -45,25 +45,27 @@ async def on_member_remove(member):
 
 @client.event
 async def on_message(message):
-    if message.content.startswith("t/mute"):
-        if message.author.guild_permissions.administrator:
-            firstid = message.content[4:]
-            author = message.guild.get_member(int(firstid[2:20]))
-            role = discord.utils.get(message.guild.roles, name="뮤트")
-            await author.add_roles(role)
-            await message.channel.send("<:Blobokhand:767031123812417548>  http://gph.is/2bDfI0R ** MUTE DONE ** ")
-        else:
-            await message.channel.send("**관리자 권한 거부**")
+@client.event
+async def on_member_join(member):
+    try:
+        syscha = member.guild.system_channel
+        await syscha.send(f"{member.mention} 님 어서오세요! 🥳 ")
+    except:
+        pass
 
-    if message.content.startswith("t/unmute"):
-        if message.author.guild_permissions.administrator:
-            firstid = message.content[5:]
-            author = message.guild.get_member(int(firstid[2:20]))
-            role = discord.utils.get(message.guild.roles, name="뮤트")
-            await author.remove_roles(role)
-            await message.channel.send("https://gph.is/2HPTFD1  <:Blobokhand:767031123812417548>  **speak!**")
-        else:
-            await message.channel.send("**관리자 권한 거부**")
+@client.event
+async def on_member_remove(member):
+    try:
+        syscha = member.guild.system_channel
+        await syscha.send(member.name + "님 ``" + member.guild.name + "`` 안녕히가세요 ㅜ.. 😭")
+    except:
+        pass
+
+if message.content.startswith("t/dm0777"):
+    message = message.content[4:]
+    getusermention = client.get_user(아이디)
+    await getusermention.send(message)
+
 	
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
