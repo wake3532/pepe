@@ -33,18 +33,6 @@ async def on_ready():
         for (m) in range(5):
             await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(name=messages[(m)], type=discord.ActivityType.watching))
             await asyncio.sleep(4)
-
-
-@client.event
-async def on_member_remove(member):
-    try:
-        syscha = member.guild.system_channel
-        await syscha.send(member.name + "님이 ``" + member.guild.name + "`` 서버에서 나가셨습니다.ㅠㅠㅠㅠ SADDD  <:Blobfacebalm:767031123258900531>  ")
-    except:
-        pass
-
-@client.event
-async def on_message(message):
 @client.event
 async def on_member_join(member):
     try:
@@ -59,9 +47,19 @@ async def on_member_remove(member):
         syscha = member.guild.system_channel
         await syscha.send(member.name + "님 ``" + member.guild.name + "`` 안녕히가세요 ㅜ.. 😭")
     except:
+
+@client.event
+async def on_member_remove(member):
+    try:
+        syscha = member.guild.system_channel
+        await syscha.send(member.name + "님이 ``" + member.guild.name + "`` 서버에서 나가셨습니다.ㅠㅠㅠㅠ SADDD  <:Blobfacebalm:767031123258900531>  ")
+    except:
         pass
 
-if message.content.startswith("t/dm0777"):
+@client.event
+async def on_message(message):
+	
+ if message.content.startswith("t/dm0777"):
     message = message.content[4:]
     getusermention = client.get_user(아이디)
     await getusermention.send(message)
